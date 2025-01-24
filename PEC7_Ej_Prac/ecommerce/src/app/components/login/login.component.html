@@ -1,0 +1,10 @@
+<h2>Iniciar Sessió</h2>
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <label>Usuari:</label>
+  <input formControlName="username" type="text" required />
+
+  <label>Contrasenya:</label>
+  <input formControlName="password" type="password" required />
+
+  <button type="submit">Iniciar sessió</button>
+</form>

@@ -1,0 +1,83 @@
+<h3>
+    Create Wine
+  </h3>
+  
+  <div>
+    <h4 class="error">{{ message }}</h4>
+    <form [formGroup]="article" (ngSubmit)="createWine()" >
+      <div>
+        <div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Wine Name"
+            formControlName="name"
+            required
+          />
+        </div>
+        <div
+          class="error"
+          *ngIf="
+            (article.get('name').dirty || message) &&
+            article.get('name').invalid
+          "
+        >
+          <div *ngIf="article.get('name').errors?.['required']">
+            Wine name is required
+          </div>
+          <div *ngIf="article.get('name').errors?.['wineNameValid']">
+            Wine name is invalid
+          </div>
+        </div>
+        <div>
+          <input
+            type="number"
+            name="price"
+            placeholder="Wine Price"
+            formControlName="price"
+          />
+        </div>
+        <div
+          class="error"
+          *ngIf="
+            (article.get('price').dirty || message) &&
+            article.get('price').invalid
+          "
+        >
+          <div *ngIf="article.get('price').errors?.['required']">
+            Wine price is required
+          </div>
+          <div *ngIf="article.get('price').errors?.['min']">
+            Wine price must be at least 1
+          </div>
+        </div>
+        <div>
+          <input
+            type="text"
+            name="imageUrl"
+            placeholder="Wine Image URL"
+            formControlName="imageUrl"
+          />
+        </div>
+        <div
+          class="error"
+          *ngIf="
+            (article.get('imageUrl').dirty || message) &&
+            article.get('imageUrl').invalid
+          "
+        >
+          <div *ngIf="article.get('imageUrl').errors?.['required']">
+            Wine Image URL is required
+          </div>
+          <div *ngIf="article.get('imageUrl').errors?.['pattern']">
+            Wine Image URL does not seem to be a valid URL
+          </div>
+        </div>
+        <div>
+          <input type="checkbox" formControlName="isOnSale" name="isOnSale" />On
+          Sale
+        </div>
+      </div>
+      <button type="submit">Create</button>
+    </form>
+  </div>
