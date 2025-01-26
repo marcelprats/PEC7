@@ -4,16 +4,24 @@
         <button class="navbar-toggler" type="button" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
         </button>
+        
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
+            <div class="navbar-nav me-auto">
                 <a class="nav-link active" (click)="mostraArticleList()">Articulos</a>
                 <a class="nav-link" (click)="mostraFormReactive()">Nuevo articulo reactive</a>
+            </div>
+            
+            <div class="d-flex">
+                <ng-container *ngIf="!isLoggedIn(); else logged">
+                    <a class="btn btn-outline-light me-2" routerLink="/login">Login</a>
+                    <a class="btn btn-primary" routerLink="/register">Register</a>
+                </ng-container>
+
+                <ng-template #logged>
+                    <span class="navbar-text me-2">Hola, {{ username }}</span>
+                    <button class="btn btn-danger" (click)="logout()">Logout</button>
+                </ng-template>
             </div>
         </div>
     </div>
 </nav>
-<BR>
-<div>
-    <app-article-list *ngIf="opcioArticleList"></app-article-list>
-    <app-article-new-reactive *ngIf="opcioFormReactive"></app-article-new-reactive>
-</div>

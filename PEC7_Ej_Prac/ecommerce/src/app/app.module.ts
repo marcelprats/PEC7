@@ -38,7 +38,8 @@ import { CreateArticleComponent } from './components/create-article/create-artic
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule, 
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

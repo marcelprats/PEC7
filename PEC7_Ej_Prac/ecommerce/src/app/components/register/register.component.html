@@ -1,1 +1,14 @@
-<p>register works!</p>
+<div class="login-container">
+    <h2>Registre</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <label for="username">Usuari:</label>
+        <input id="username" type="text" formControlName="username" required>
+
+        <label for="password">Contrasenya:</label>
+        <input id="password" type="password" formControlName="password" required>
+
+        <button type="submit" [disabled]="registerForm.invalid">Registrar-se</button>
+    </form>
+  
+    <p>Ja tens compte? <a routerLink="/login">Inicia sessió</a></p>
+</div>

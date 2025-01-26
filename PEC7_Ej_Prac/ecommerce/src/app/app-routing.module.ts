@@ -8,9 +8,11 @@ import { CreateArticleComponent } from './components/create-article/create-artic
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'articles', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'articles', component: ArticleListComponent },
+  { path: '', redirectTo: 'articles', pathMatch: 'full' },
   { path: 'article/list', component: ArticleListComponent },
   { path: 'article/:id', component: ArticleDetailComponent },
   { path: 'article/create', component: CreateArticleComponent, canActivate: [AuthGuard] }

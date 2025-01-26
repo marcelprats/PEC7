@@ -7,25 +7,45 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Ruta d'exemple per obtenir articles
+let articles = [
+    { id: 1, title: "Article 1", content: "Contingut de l'article 1" },
+    { id: 2, title: "Article 2", content: "Contingut de l'article 2" }
+];
+
+//Endpoint per obtenir articles (GET)
 app.get('/api/articles', (req, res) => {
-    res.json([
-        { id: 1, title: "Article 1", content: "Contingut de l'article 1" },
-        { id: 2, title: "Article 2", content: "Contingut de l'article 2" }
-    ]);
+    res.json(articles);
 });
 
-// Endpoint de login d'exemple
-app.post('/user/login', (req, res) => {
+//Endpoint per afegir un article (POST)
+app.post('/api/articles', (req, res) => {
+    const { title, content } = req.body;
+    if (!title || !content) {
+        return res.status(400).json({ error: "Falten camps obligatoris" });
+    }
+
+    const newArticle = {
+        id: articles.length + 1,
+        title,
+        content
+    };
+    
+    articles.push(newArticle);
+    res.status(201).json(newArticle);
+});
+
+app.post('/api/user/login', (req, res) => {
     const { username, password } = req.body;
-    if (username === "admin" && password === "1234") {
-        res.json({ token: "fake-jwt-token" });
+
+    if (username === "admin" && password === "SECRET") {
+        return res.json({ message: "Login correcto" });
     } else {
-        res.status(401).json({ error: "Credencials incorrectes" });
+        return res.status(401).json({ error: "Credenciales incorrectas" });
     }
 });
 
-// Iniciar el servidor
+
+//Iniciar servidor
 app.listen(PORT, () => {
-    console.log(`Servidor backend en funcionament a http://localhost:${PORT}`);
+    console.log(`Servidor en marxa a http://localhost:${PORT}`);
 });

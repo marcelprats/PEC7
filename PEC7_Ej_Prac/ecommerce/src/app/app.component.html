@@ -1,2 +1,7 @@
 <app-navbar></app-navbar>
+
+<div *ngIf="!isAuthPage()">
+    <app-article-list></app-article-list>
+</div>
+
 <router-outlet></router-outlet>

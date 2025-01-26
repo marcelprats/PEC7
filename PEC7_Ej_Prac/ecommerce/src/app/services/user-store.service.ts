@@ -18,7 +18,7 @@ export class UserStoreService {
   }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();  // Retorna true si hi ha un token
+    return !!this.getToken();
   }
 
   logout() {

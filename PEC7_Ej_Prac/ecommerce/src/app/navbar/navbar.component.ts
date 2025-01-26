@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,18 +8,25 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  opcioArticleList:boolean =true;
-  opcioFormTemplate:boolean=false;
-  opcioFormReactive:boolean=false;
-  
-  mostraArticleList(){
-    this.opcioArticleList=true;
-    this.opcioFormReactive=false;
+  username: string = '';
+
+  constructor(private router: Router, private authService: AuthService) {}
+
+  mostraArticleList(): void {
+    this.router.navigate(['/articles']);
   }
 
-  mostraFormReactive(){
-    this.opcioArticleList=false;
-    this.opcioFormReactive=true;
+  mostraFormReactive(): void {
+    this.router.navigate(['/article-new-reactive']);
   }
 
+  isLoggedIn(): boolean {
+    this.username = this.authService.getUsername();
+    return this.authService.isAuthenticated();
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }
